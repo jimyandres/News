@@ -57,17 +57,21 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <br />
-        <Search
-          value={searchTerm}
-          onChange={this.onSearchChange}
-        >
-          Search
-        </Search>
-        <Table
-          list={list}
-          pattern={searchTerm}
-          onDismiss={this.onDismiss}
-        />
+        <div className="page">
+          <div className="interactions">
+            <Search
+              value={searchTerm}
+              onChange={this.onSearchChange}
+            >
+              <spam>Search </spam>
+            </Search>
+          </div>
+          <Table
+            list={list}
+            pattern={searchTerm}
+            onDismiss={this.onDismiss}
+          />
+        </div>
       </div>
     );
   }
@@ -84,28 +88,19 @@ const Search = ({value, onChange, children}) =>
   </form>
 
 const Table = ({list, pattern, onDismiss}) =>
-  <div>
+  <div className="table">
     { list.filter(isSearched(pattern)).map(item =>
-      <div key={item.objectID}>
-        <ul>
-          <li>
-            <span>
-              <a href={item.url}>{ item.title }</a>
-            </span>
-          </li>
-          <li>
-            <span>{item.author}</span>
-          </li>
-          <li>
-            <span>{item.num_comments}</span>
-          </li>
-          <li>
-            <span>{item.points}</span>
-          </li>
-        </ul>
-        <span>
+      <div key={item.objectID} className="table-row">
+        <span style={largeColumn}>
+          <a href={item.url}>{ item.title }</a>
+        </span>
+        <span style={midColumn}>{item.author}</span>
+        <span style={smallColumn}>{item.num_comments}</span>
+        <span style={smallColumn}>{item.points}</span>
+        <span style={smallColumn}>
           <Button
             onClick={() => onDismiss(item.objectID)}
+            className="button-inline"
           >
             Dismiss
           </Button>
@@ -122,5 +117,15 @@ const Button = ({onClick, className='', children}) =>
   >
     {children}
   </button>
+
+  const largeColumn = {
+    width: '40%',
+  };
+  const midColumn = {
+    width: '30%',
+  };
+  const smallColumn = {
+    width: '10%',
+  };
 
 export default App;
