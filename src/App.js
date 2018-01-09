@@ -14,9 +14,9 @@ const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
-const isSearched = searchTerm =>
-  item =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase());
+// const isSearched = searchTerm =>
+//   item =>
+//     item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
 class App extends Component {
   constructor(props) {
@@ -145,24 +145,18 @@ class App extends Component {
               <spam>Search </spam>
             </Search>
           </div>
-          {
-            error
-            ? <div className="interactions">
-              <p>Something went wrong.</p>
-            </div>
-            : <Table
-              list={list}
-              onDismiss={this.onDismiss}
-            />
-          }
+          <TableWithError
+            error={error}
+            list={list}
+            onDismiss={this.onDismiss}
+          />
           <div className="interactions">
-            {
-              isLoading
-              ? <Loading />
-              : <Button onClick={() => this.fetchSearchTopStories(searchKey, page+1)}>
-                More
-              </Button>
-            }
+            <ButtonWithLoading
+              isLoading={isLoading}
+              onClick={() => this.fetchSearchTopStories(searchKey, page+1)}
+            >
+              More
+            </ButtonWithLoading>
           </div>
         </div>
       </div>
@@ -253,7 +247,7 @@ Button.propTypes = {
 };
 
 const Loading = () =>
-  <div class="loader loader--style1" title="0">
+  <div className="loader loader--style1" title="0">
     <svg id="loader-1" width="40px" height="40px">
       <path opacity="0.2" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
         s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
@@ -270,6 +264,24 @@ const Loading = () =>
       </path>
     </svg>
   </div>
+
+const withLoading = (Component) =>
+  ({isLoading, ...rest}) =>
+    isLoading
+    ? <Loading />
+    : <Component {...rest} />
+
+const ButtonWithLoading = withLoading(Button);
+
+const withError = (Component) =>
+  ({error, ...rest}) =>
+    error
+    ? <div className="interactions">
+      <p>Something went wrong.</p>
+    </div>
+    : <Component {...rest} />
+
+const TableWithError = withError(Table);
 
 const largeColumn = {
   width: '40%',
