@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import fetch from 'isomorphic-fetch';
+import PropTypes from 'prop-types';
 
 const DEFAULT_QUERY = "redux";
 const DEFAULT_HPP = '20';
@@ -173,6 +174,13 @@ const Search = ({value, onChange, onSubmit, children}) =>
     </button>
   </form>
 
+Search.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 const Table = ({list, onDismiss}) =>
   <div className="table">
     { list.map(item =>
@@ -195,7 +203,12 @@ const Table = ({list, onDismiss}) =>
     )}
   </div>
 
-const Button = ({onClick, className='', children}) =>
+Table.propTypes = {
+  list: PropTypes.array.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+};
+
+const Button = ({onClick, className, children}) =>
   <button
     onClick={onClick}
     className={className}
@@ -204,15 +217,25 @@ const Button = ({onClick, className='', children}) =>
     {children}
   </button>
 
-  const largeColumn = {
-    width: '40%',
-  };
-  const midColumn = {
-    width: '30%',
-  };
-  const smallColumn = {
-    width: '10%',
-  };
+Button.defaultProps = {
+  className: '',
+}
+
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+const largeColumn = {
+  width: '40%',
+};
+const midColumn = {
+  width: '30%',
+};
+const smallColumn = {
+  width: '10%',
+};
 
 export default App;
 
