@@ -17,6 +17,43 @@ import Table from '../Table';
 import Button from '../Button';
 import Search from '../Search';
 
+const updateSearchTopStoriesState = (hits, page) =>
+  (prevState) => {
+    const {searchKey, results} = prevState;
+
+    const oldHits = results && results[searchKey]
+      ? results[searchKey].hits
+      : [];
+
+    const updatedHits = [
+      ...oldHits,
+      ...hits
+    ];
+
+    return {
+      results: {
+        ...results,
+        [searchKey]: {hits: updatedHits, page}
+      },
+      isLoading: false,
+    };
+  };
+
+const updateResultsStateOnDismiss = (id) =>
+  (prevState) => {
+    const {searchKey, results} = prevState;
+    const {hits, page} = results[searchKey];
+    const isNotID = item => item.objectID !== id;
+    const updatedHits = hits.filter(isNotID);
+
+    return {
+      results: {
+        ...results,
+        [searchKey]: {hits: updatedHits, page}
+      }
+    };
+  }
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -43,24 +80,7 @@ class App extends Component {
 
   setSearchTopStories(result) {
     const {hits, page} = result;
-    const {searchKey, results} = this.state;
-
-    const oldHits = results && results[searchKey]
-      ? results[searchKey].hits
-      : [];
-
-    const updatedHits = [
-      ...oldHits,
-      ...hits
-    ];
-
-    this.setState({
-      results: {
-        ...results,
-        [searchKey]: {hits: updatedHits, page}
-      },
-      isLoading: false,
-    });
+    this.setState(updateSearchTopStoriesState(hits, page));
   }
 
   fetchSearchTopStories(searchTerm, page = 0) {
@@ -89,17 +109,7 @@ class App extends Component {
   }
 
   onDismiss(id) {
-    const {searchKey, results} = this.state;
-    const {hits, page} = results[searchKey];
-
-    const isNotID = item => item.objectID !== id;
-    const updatedHits = hits.filter(isNotID);
-    this.setState({
-      results: {
-        ...results,
-        [searchKey]: {hits: updatedHits, page}
-      }
-    });
+    this.setState(updateResultsStateOnDismiss(id));
   }
 
   onSearchChange(event) {
