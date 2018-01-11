@@ -3,7 +3,6 @@ import logo from '../../logo.svg';
 import './index.css';
 
 import fetch from 'isomorphic-fetch';
-import PropTypes from 'prop-types';
 
 import {
   DEFAULT_QUERY,
@@ -114,8 +113,6 @@ class App extends Component {
       searchKey,
       error,
       isLoading,
-      sortKey,
-      isSortReverse
     } = this.state;
 
     const page = (

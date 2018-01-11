@@ -117,10 +117,10 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  list: PropTypes.array.isRequired,
-  sortKey: PropTypes.string.isRequired,
-  onSort: PropTypes.func.isRequired,
-  onDismiss: PropTypes.func.isRequired,
+  list: PropTypes.array,
+  sortKey: PropTypes.string,
+  onSort: PropTypes.func,
+  onDismiss: PropTypes.func,
 };
 
 const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
@@ -137,7 +137,7 @@ const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
       onClick={() => onSort(sortKey)}
       className={sortClass}
     >
-      {children}<div class={arrowSort}></div>
+      {children}<div className={arrowSort}></div>
     </Button>
   );
 }
