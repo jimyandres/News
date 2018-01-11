@@ -1,0 +1,53 @@
+.table {
+  margin: 20px 0;
+}
+
+.table-header {
+  display: flex;
+  line-height: 24px;
+  font-size: 16px;
+  padding: 0 10px;
+  justify-content: space-between;
+}
+
+.table-empty {
+  margin: 200px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.table-row {
+  display: flex;
+  line-height: 24px;
+  white-space: nowrap;
+  margin: 10px 0;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
+}
+
+.table-header > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+}
+
+.table-row > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+}
+
+.arrow {
+	height: 5px; width: 5px;
+	border: 1px solid #00A7B2;
+	border-width: 2px 2px 0 0;
+  margin: 10px 0 0 10px;
+  float: right;
+}
+.arrow-up {
+  transform: rotate(-45deg);
+}
+.arrow-down {
+  transform: rotate(135deg);
+}
