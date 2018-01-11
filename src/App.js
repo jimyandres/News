@@ -5,6 +5,7 @@ import './App.css';
 import fetch from 'isomorphic-fetch';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
+import classNames from 'classnames';
 
 const DEFAULT_QUERY = "redux";
 const DEFAULT_HPP = '20';
@@ -232,6 +233,7 @@ const Table = ({list, sortKey, isSortReverse, onSort, onDismiss}) => {
             sortKey={'TITLE'}
             onSort={onSort}
             activeSortKey={sortKey}
+            isSortReverse={isSortReverse}
           >
             Title
           </Sort>
@@ -241,6 +243,7 @@ const Table = ({list, sortKey, isSortReverse, onSort, onDismiss}) => {
             sortKey={'AUTHOR'}
             onSort={onSort}
             activeSortKey={sortKey}
+            isSortReverse={isSortReverse}
           >
             Author
           </Sort>
@@ -250,6 +253,7 @@ const Table = ({list, sortKey, isSortReverse, onSort, onDismiss}) => {
             sortKey={'COMMENTS'}
             onSort={onSort}
             activeSortKey={sortKey}
+            isSortReverse={isSortReverse}
           >
             Comments
           </Sort>
@@ -259,6 +263,7 @@ const Table = ({list, sortKey, isSortReverse, onSort, onDismiss}) => {
             sortKey={'POINTS'}
             onSort={onSort}
             activeSortKey={sortKey}
+            isSortReverse={isSortReverse}
           >
             Points
           </Sort>
@@ -334,17 +339,21 @@ const Loading = () =>
     </svg>
   </div>
 
-const Sort = ({sortKey, onSort, activeSortKey, children}) => {
-  const sortClass = ['button-inline'];
-  if (sortKey === activeSortKey) {
-    sortClass.push('button-active');
-  }
+const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
+  const sortClass = classNames(
+    'button-inline',
+    {'button-active': sortKey === activeSortKey}
+  );
+  const arrowSort = classNames(
+    {'arrow arrow-up': sortKey === activeSortKey && !isSortReverse},
+    {'arrow arrow-down': sortKey === activeSortKey && isSortReverse}
+  );
   return (
     <Button
       onClick={() => onSort(sortKey)}
-      className={sortClass.join(' ')}
+      className={sortClass}
     >
-      {children}
+      {children}<div class={arrowSort}></div>
     </Button>
   );
 }

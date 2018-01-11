@@ -101,3 +101,17 @@ svg path,
 svg rect{
   fill: #00A7B2;
 }
+
+.arrow {
+	height: 5px; width: 5px;
+	border: 1px solid #00A7B2;
+	border-width: 2px 2px 0 0;
+  margin: 10px 0 0 10px;
+  float: right;
+}
+.arrow-up {
+  transform: rotate(-45deg);
+}
+.arrow-down {
+  transform: rotate(135deg);
+}
