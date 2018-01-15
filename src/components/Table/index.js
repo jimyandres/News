@@ -49,46 +49,17 @@ class Table extends Component {
     return (
       <div className="table">
         <div className="table-header">
-          <span style={largeColumn}>
-            <Sort
-              sortKey={'TITLE'}
-              onSort={this.onSort}
-              activeSortKey={sortKey}
-              isSortReverse={isSortReverse}
-            >
-              Title
-            </Sort>
-          </span>
-          <span style={midColumn}>
-            <Sort
-              sortKey={'AUTHOR'}
-              onSort={this.onSort}
-              activeSortKey={sortKey}
-              isSortReverse={isSortReverse}
-            >
-              Author
-            </Sort>
-          </span>
-          <span style={smallColumn}>
-            <Sort
-              sortKey={'COMMENTS'}
-              onSort={this.onSort}
-              activeSortKey={sortKey}
-              isSortReverse={isSortReverse}
-            >
-              Comments
-            </Sort>
-          </span>
-          <span style={smallColumn}>
-            <Sort
-              sortKey={'POINTS'}
-              onSort={this.onSort}
-              activeSortKey={sortKey}
-              isSortReverse={isSortReverse}
-            >
-              Points
-            </Sort>
-          </span>
+          <SortList
+            sortKeys={[
+              {name: 'Title', className:largeColumn},
+              {name: 'Author', className:midColumn},
+              {name: 'Comments', className:smallColumn},
+              {name: 'Points', className:smallColumn},
+            ]}
+            onSort={this.onSort}
+            activeSortKey={sortKey}
+            isSortReverse={isSortReverse}
+          />
           <span style={smallColumn}>
             Archive
           </span>
@@ -122,6 +93,19 @@ Table.propTypes = {
   onSort: PropTypes.func,
   onDismiss: PropTypes.func,
 };
+
+const SortList = ({sortKeys, ...rest}) => {
+  return sortKeys.map(key =>
+    <span key={key.name} style={key.className}>
+      <Sort
+        sortKey={key.name.toUpperCase()}
+        {... rest}
+      >
+        {key.name}
+      </Sort>
+    </span>
+  );
+}
 
 const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
   const sortClass = classNames(
