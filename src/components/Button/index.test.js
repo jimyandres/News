@@ -8,14 +8,17 @@ import Button from './index';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Button', () => {
+
+  const somefunc = () => "something";
+
   it('render without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Button>Testing</Button>, div);
+    ReactDOM.render(<Button onClick={somefunc}>Testing</Button>, div);
   });
 
   test('has a valid snapshot', () => {
     const component =  renderer.create(
-      <Button>Testing</Button>
+      <Button onClick={somefunc}>Testing</Button>
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -23,7 +26,7 @@ describe('Button', () => {
 
   it('should render children when passed in', () => {
     const element = shallow(
-      <Button onClick="something">
+      <Button onClick={somefunc}>
         Search
       </Button>
     );
