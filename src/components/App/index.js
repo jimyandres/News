@@ -170,14 +170,36 @@ class App extends Component {
   }
 }
 
-const EnhancedTable = ({error,list,onDismiss,isLoading,onClick,buttonText}) =>
-  <div>
-    <TableWithError
-      error={error}
-      list={list}
-      onDismiss={onDismiss}
-    />
-  </div>
+const withInfiniteScroll = (Component) =>
+  class WithInfiniteScroll extends React.Component {
+
+    componentDidMount() {
+      window.addEventListener('scroll', this.onScroll, false);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.onScroll, false);
+    }
+
+    onScroll = () => {
+      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)
+        && this.props.list.length
+        && !this.props.isLoading) {
+          this.props.onClick();
+        }
+    }
+
+    render() {
+      return <Component {...this.props} />;
+    }
+  }
+
+const EnhancedTable = ({error,list,onDismiss}) =>
+  <TableWithError
+    error={error}
+    list={list}
+    onDismiss={onDismiss}
+  />
 
 const Loading = () =>
   <div className="loader loader--style1" title="0">
@@ -200,9 +222,12 @@ const Loading = () =>
 
 const withLoading = (Component) =>
   ({isLoading, ...rest}) =>
-    isLoading
-    ? <Loading />
-    : <Component {...rest} />
+    <div>
+      <Component {...rest} />
+      {isLoading
+      ? <Loading />
+      : ''}
+    </div>
 
 const withPaginated = (Component) =>
   ({isLoading, onClick, buttonText, ...rest}) =>
@@ -232,7 +257,9 @@ const withError = (Component) =>
 const TableWithError = withError(Table);
 
 const EnhancedTableWithConditionalRendering = compose(
-  withPaginated
+  // withPaginated
+  withInfiniteScroll,
+  withLoading,
 )(EnhancedTable);
 
 export default App;
