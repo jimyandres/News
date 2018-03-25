@@ -3,6 +3,7 @@ import logo from '../../logo.svg';
 import './index.css';
 
 import fetch from 'isomorphic-fetch';
+import { compose } from 'recompose';
 
 import {
   DEFAULT_QUERY,
@@ -154,24 +155,29 @@ class App extends Component {
               <spam>Search </spam>
             </Search>
           </div>
-          <TableWithError
+
+          <EnhancedTableWithConditionalRendering
             error={error}
             list={list}
             onDismiss={this.onDismiss}
+            isLoading={isLoading}
+            onClick={() => this.fetchSearchTopStories(searchKey, page+1)}
+            buttonText="More"
           />
-          <div className="interactions">
-            <ButtonWithLoading
-              isLoading={isLoading}
-              onClick={() => this.fetchSearchTopStories(searchKey, page+1)}
-            >
-              More
-            </ButtonWithLoading>
-          </div>
         </div>
       </div>
     );
   }
 }
+
+const EnhancedTable = ({error,list,onDismiss,isLoading,onClick,buttonText}) =>
+  <div>
+    <TableWithError
+      error={error}
+      list={list}
+      onDismiss={onDismiss}
+    />
+  </div>
 
 const Loading = () =>
   <div className="loader loader--style1" title="0">
@@ -198,6 +204,21 @@ const withLoading = (Component) =>
     ? <Loading />
     : <Component {...rest} />
 
+const withPaginated = (Component) =>
+  ({isLoading, onClick, buttonText, ...rest}) =>
+    <div>
+      <Component {...rest} />
+
+      <div className="interactions">
+        <ButtonWithLoading
+          isLoading={isLoading}
+          onClick={onClick}
+        >
+          {buttonText}
+        </ButtonWithLoading>
+      </div>
+    </div>
+
 const ButtonWithLoading = withLoading(Button);
 
 const withError = (Component) =>
@@ -209,6 +230,10 @@ const withError = (Component) =>
     : <Component {...rest} />
 
 const TableWithError = withError(Table);
+
+const EnhancedTableWithConditionalRendering = compose(
+  withPaginated
+)(EnhancedTable);
 
 export default App;
 
