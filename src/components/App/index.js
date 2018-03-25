@@ -174,7 +174,7 @@ class App extends Component {
   }
 }
 
-const withInfiniteScroll = (Component) =>
+const withInfiniteScroll = (conditionalFn) => (Component) =>
   class WithInfiniteScroll extends React.Component {
 
     componentDidMount() {
@@ -186,10 +186,7 @@ const withInfiniteScroll = (Component) =>
     }
 
     onScroll = () => {
-      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)
-        && this.props.list.length
-        && !this.props.isLoading
-        && !this.props.isError) {
+      if (conditionalFn(this.props)) {
           this.props.onClick();
         }
     }
@@ -226,20 +223,20 @@ const Loading = () =>
     </svg>
   </div>
 
-const withLoading = (Component) =>
-  ({isLoading, ...rest}) =>
+const withLoading = (conditionalFn) => (Component) =>
+  (props) =>
     <div>
-      <Component {...rest} />
-      {isLoading && !rest.isError &&
+      <Component {...props} />
+      {conditionalFn(props) &&
       <Loading />}
     </div>
 
-const withPaginated = (Component) =>
+const withPaginated = (conditionalFn) => (Component) =>
   (props) =>
     <div>
       <Component {...props} />
 
-      {props.isError &&
+      {conditionalFn(props) &&
         <div className="interactions">
           <Button
             isLoading={props.isLoading}
@@ -261,10 +258,20 @@ const withError = (Component) =>
 
 const TableWithError = withError(Table);
 
+const paginatedCondition = props => props.isError;
+
+const infiniteScrollCondition = props =>
+  ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)
+  && props.list.length
+  && !props.isLoading
+  && !props.isError);
+
+const loadingCondition = props => props.isLoading;
+
 const EnhancedTableWithConditionalRendering = compose(
-  withPaginated,
-  withInfiniteScroll,
-  withLoading,
+  withPaginated(paginatedCondition),
+  withInfiniteScroll(infiniteScrollCondition),
+  withLoading(loadingCondition),
 )(EnhancedTable);
 
 export default App;
