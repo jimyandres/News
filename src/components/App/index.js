@@ -37,6 +37,7 @@ const updateSearchTopStoriesState = (hits, page) =>
         [searchKey]: {hits: updatedHits, page}
       },
       isLoading: false,
+      isError: false,
     };
   };
 
@@ -64,6 +65,7 @@ class App extends Component {
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
       error: null,
+      isError: false,
       isLoading: false,
     }
 
@@ -89,7 +91,7 @@ class App extends Component {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(e => this.setState({error: e}));
+      .catch(e => this.setState({error: e, isError:true, isLoading:false}));
   }
 
   componentDidMount() {
@@ -122,6 +124,7 @@ class App extends Component {
       searchTerm,
       results,
       searchKey,
+      isError,
       error,
       isLoading,
     } = this.state;
@@ -157,12 +160,13 @@ class App extends Component {
           </div>
 
           <EnhancedTableWithConditionalRendering
+            isError={isError}
             error={error}
             list={list}
             onDismiss={this.onDismiss}
             isLoading={isLoading}
             onClick={() => this.fetchSearchTopStories(searchKey, page+1)}
-            buttonText="More"
+            buttonText="Try Again"
           />
         </div>
       </div>
@@ -184,7 +188,8 @@ const withInfiniteScroll = (Component) =>
     onScroll = () => {
       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)
         && this.props.list.length
-        && !this.props.isLoading) {
+        && !this.props.isLoading
+        && !this.props.isError) {
           this.props.onClick();
         }
     }
@@ -194,8 +199,9 @@ const withInfiniteScroll = (Component) =>
     }
   }
 
-const EnhancedTable = ({error,list,onDismiss}) =>
+const EnhancedTable = ({error,isError,list,onDismiss}) =>
   <TableWithError
+    isError={isError}
     error={error}
     list={list}
     onDismiss={onDismiss}
@@ -224,31 +230,30 @@ const withLoading = (Component) =>
   ({isLoading, ...rest}) =>
     <div>
       <Component {...rest} />
-      {isLoading
-      ? <Loading />
-      : ''}
+      {isLoading && !rest.isError &&
+      <Loading />}
     </div>
 
 const withPaginated = (Component) =>
-  ({isLoading, onClick, buttonText, ...rest}) =>
+  (props) =>
     <div>
-      <Component {...rest} />
+      <Component {...props} />
 
-      <div className="interactions">
-        <ButtonWithLoading
-          isLoading={isLoading}
-          onClick={onClick}
-        >
-          {buttonText}
-        </ButtonWithLoading>
-      </div>
+      {props.isError &&
+        <div className="interactions">
+          <Button
+            isLoading={props.isLoading}
+            onClick={props.onClick}
+          >
+            {props.buttonText}
+          </Button>
+        </div>
+      }
     </div>
 
-const ButtonWithLoading = withLoading(Button);
-
 const withError = (Component) =>
-  ({error, ...rest}) =>
-    error
+  ({isError, ...rest}) =>
+    isError
     ? <div className="interactions">
       <p>Something went wrong.</p>
     </div>
@@ -257,7 +262,7 @@ const withError = (Component) =>
 const TableWithError = withError(Table);
 
 const EnhancedTableWithConditionalRendering = compose(
-  // withPaginated
+  withPaginated,
   withInfiniteScroll,
   withLoading,
 )(EnhancedTable);
