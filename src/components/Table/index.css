@@ -20,10 +20,11 @@
   display: flex;
   line-height: 24px;
   white-space: nowrap;
-  margin: 10px 0;
-  padding: 10px;
+  /*margin: 10px 0;*/
+  /*padding: 10px;*/
+  align-items: center;
   background: #ffffff;
-  border: 1px solid #e3e3e3;
+  border-top: 1px solid #e3e3e3;
 }
 
 .table-header > span {
@@ -33,7 +34,7 @@
 }
 
 .table-row > span {
-  overflow: hidden;
+  /*overflow: hidden;*/
   text-overflow: ellipsis;
   padding: 0 5px;
 }

@@ -4,6 +4,7 @@ import { sortBy } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import FlatButton from 'material-ui/FlatButton';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import './index.css';
 
 const SORTS = {
@@ -66,22 +67,30 @@ class Table extends Component {
           </FlatButton>
         </div>
         { reverseSortedList.map(item =>
-          <div key={item.objectID} className="table-row">
-            <span style={largeColumn}>
-              <a href={item.url}>{ item.title }</a>
-            </span>
-            <span style={midColumn}>{item.author}</span>
-            <span style={smallColumn}>{item.num_comments}</span>
-            <span style={smallColumn}>{item.points}</span>
-            <span style={smallColumn}>
-              <Button
-                onClick={() => onDismiss(item.objectID)}
-                className="button-inline"
-              >
-                Dismiss
-              </Button>
-            </span>
-          </div>
+          <Card key={item.objectID} style={{margin: '10px 0', paddingBottom: '0'}}>
+            <CardHeader
+              title={ item.title }
+              subtitle={ 'by ' + item.author}
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
+            <CardText expandable={true} className="table-row">
+              <span style={largeColumn}>
+                <a href={item.url}>{ item.title }</a>
+              </span>
+              <span style={midColumn}>{item.author}</span>
+              <span style={smallColumn}>{item.num_comments}</span>
+              <span style={smallColumn}>{item.points}</span>
+              <span style={smallColumn}>
+                <Button
+                  onClick={() => onDismiss(item.objectID)}
+                  className="button-inline"
+                >
+                  Dismiss
+                </Button>
+              </span>
+            </CardText>
+          </Card>
         )}
       </div>
     );
