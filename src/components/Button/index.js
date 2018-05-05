@@ -6,9 +6,9 @@ import './index.css';
 const Button = ({onClick, className, children}) =>
   <FlatButton
     onClick={onClick}
-    className={className}
     type="button"
     primary={true}
+    fullWidth
   >
     {children}
   </FlatButton>

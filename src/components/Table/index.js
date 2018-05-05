@@ -3,6 +3,7 @@ import Button from '../Button';
 import { sortBy } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import FlatButton from 'material-ui/FlatButton';
 import './index.css';
 
 const SORTS = {
@@ -60,9 +61,9 @@ class Table extends Component {
             activeSortKey={sortKey}
             isSortReverse={isSortReverse}
           />
-          <span style={smallColumn}>
+          <FlatButton primary style={smallColumn}>
             Archive
-          </span>
+          </FlatButton>
         </div>
         { reverseSortedList.map(item =>
           <div key={item.objectID} className="table-row">
