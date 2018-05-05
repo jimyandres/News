@@ -153,7 +153,7 @@ class App extends Component {
               onChange={this.onSearchChange}
               onSubmit={this.onSearchSubmit}
             >
-              <spam>Search </spam>
+              <span>Search </span>
             </Search>
           </div>
           <EnhancedTable
