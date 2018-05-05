@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import './index.css';
 
 class Search extends Component {
@@ -17,15 +19,15 @@ class Search extends Component {
 
     return (
       <form onSubmit={onSubmit}>
-        <input
+        <TextField
+          floatingLabelText="Search anything!"
           type="text"
           value={value}
           onChange={onChange}
           ref={(node) => { this.input = node; }}
+          className='inputText'
         />
-        <button type="submit">
-          {children}
-        </button>
+        <RaisedButton type="submit" primary label={children} />
       </form>
     );
   }
