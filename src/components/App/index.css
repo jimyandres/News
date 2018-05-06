@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -8,6 +7,7 @@
 }
 
 .App-header {
+  text-align: center;
   background-color: #222;
   height: 180px;
   padding: 20px;
@@ -24,7 +24,9 @@
 }
 
 .interactions {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .loader{
