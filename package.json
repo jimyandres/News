@@ -8,6 +8,7 @@
     "gh-pages": "^1.1.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
+    "material-ui": "^1.0.0-beta.45",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
