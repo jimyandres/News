@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/Button';
 import './index.css';
 
 class Search extends Component {
@@ -17,15 +19,17 @@ class Search extends Component {
 
     return (
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
+        <TextField
+          label="Search Anything!"
+          style={{marginRight: '2em', width: '20em'}}
+          placeholder="Redux"
           value={value}
           onChange={onChange}
           ref={(node) => { this.input = node; }}
         />
-        <button type="submit">
-          {children}
-        </button>
+        <FlatButton size='large' color="primary" variant="raised" type="submit">
+          aaaa
+        </FlatButton>
       </form>
     );
   }
