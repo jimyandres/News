@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/Button';
+import RaisedButton from 'material-ui/Button';
 import './index.css';
 
 class Search extends Component {
@@ -25,11 +25,11 @@ class Search extends Component {
           placeholder="Redux"
           value={value}
           onChange={onChange}
-          ref={(node) => { this.input = node; }}
+          inputRef={(node) => { this.input = node; }}
         />
-        <FlatButton size='large' color="primary" variant="raised" type="submit">
-          aaaa
-        </FlatButton>
+        <RaisedButton size='large' color="primary" variant="raised" type="submit">
+          {children}
+        </RaisedButton>
       </form>
     );
   }
