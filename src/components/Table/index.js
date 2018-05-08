@@ -3,7 +3,6 @@ import Button from '../Button';
 import { sortBy } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import './index.css';
 import { withStyles } from 'material-ui/styles';
 import ExpansionPanel, {
