@@ -18,16 +18,17 @@ class Search extends Component {
     } = this.props;
 
     return (
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} style={{display: 'flex', flexDirection:'row', flexWrap: 'wrap',
+      justifyContent: 'space-around'}}>
         <TextField
           label="Search Anything!"
-          style={{marginRight: '2em', width: '15em'}}
+          style={{margin: '0 2em', width: '15em'}}
           placeholder="Redux"
           value={value}
           onChange={onChange}
           inputRef={(node) => { this.input = node; }}
         />
-        <RaisedButton size='large' color="primary" variant="raised" type="submit">
+        <RaisedButton size='large' color="primary" variant="raised" type="submit" style={{margin: '1em 0'}}>
           {children}
         </RaisedButton>
       </form>
