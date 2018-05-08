@@ -21,7 +21,7 @@ class Search extends Component {
       <form onSubmit={onSubmit}>
         <TextField
           label="Search Anything!"
-          style={{marginRight: '2em', width: '20em'}}
+          style={{marginRight: '2em', width: '15em'}}
           placeholder="Redux"
           value={value}
           onChange={onChange}

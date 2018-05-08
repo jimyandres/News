@@ -51,28 +51,25 @@ class Table extends Component {
         <div className="table-header">
           <SortList
             sortKeys={[
-              {name: 'Title', className:largeColumn},
-              {name: 'Author', className:midColumn},
-              {name: 'Comments', className:smallColumn},
-              {name: 'Points', className:smallColumn},
+              {name: 'Title'},
+              {name: 'Author'},
+              {name: 'Comments'},
+              {name: 'Points'},
             ]}
             onSort={this.onSort}
             activeSortKey={sortKey}
             isSortReverse={isSortReverse}
           />
-          <span style={smallColumn}>
-            Archive
-          </span>
         </div>
         { reverseSortedList.map(item =>
           <div key={item.objectID} className="table-row">
-            <span style={largeColumn}>
+            <span>
               <a href={item.url}>{ item.title }</a>
             </span>
-            <span style={midColumn}>{item.author}</span>
-            <span style={smallColumn}>{item.num_comments}</span>
-            <span style={smallColumn}>{item.points}</span>
-            <span style={smallColumn}>
+            <span>{item.author}</span>
+            <span>{item.num_comments}</span>
+            <span>{item.points}</span>
+            <span>
               <Button
                 onClick={() => onDismiss(item.objectID)}
                 className="button-inline"
@@ -96,14 +93,13 @@ Table.propTypes = {
 
 const SortList = ({sortKeys, ...rest}) => {
   return sortKeys.map(key =>
-    <span key={key.name} style={key.className}>
-      <Sort
-        sortKey={key.name.toUpperCase()}
-        {... rest}
-      >
-        {key.name}
-      </Sort>
-    </span>
+    <Sort
+      key={key.name}
+      sortKey={key.name.toUpperCase()}
+      {... rest}
+    >
+      {key.name}
+    </Sort>
   );
 }
 
@@ -119,22 +115,12 @@ const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
   return (
     <Button
       onClick={() => onSort(sortKey)}
-      className={sortClass}
+      style={{minWidth: '12em'}}
     >
-      {children}<div className={arrowSort}></div>
+      {children}
+      <div className='arrowContainer'><div className={arrowSort} /></div>
     </Button>
   );
 }
-
-
-const largeColumn = {
-  width: '40%',
-};
-const midColumn = {
-  width: '30%',
-};
-const smallColumn = {
-  width: '10%',
-};
 
 export default Table;
