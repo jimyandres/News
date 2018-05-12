@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/Button';
+import MaterialButton from 'material-ui/Button';
 import './index.css';
 
 class Search extends Component {
@@ -28,9 +28,9 @@ class Search extends Component {
           onChange={onChange}
           inputRef={(node) => { this.input = node; }}
         />
-        <RaisedButton size='large' color="primary" variant="raised" type="submit" style={{margin: '1em 0'}}>
+        <MaterialButton size='large' color="primary" variant="raised" type="submit" style={{margin: '1em 0'}}>
           {children}
-        </RaisedButton>
+        </MaterialButton>
       </form>
     );
   }

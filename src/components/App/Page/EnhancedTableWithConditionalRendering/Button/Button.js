@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
-import FlatButton from 'material-ui/Button';
+import MaterialButton from 'material-ui/Button';
 
 const Button = ({onClick, className, children, ...rest}) =>
-  <FlatButton
+  <MaterialButton
     onClick={onClick}
     color='primary'
     {...rest}
   >
     {children}
-  </FlatButton>
+  </MaterialButton>
 
 Button.defaultProps = {
   className: '',
