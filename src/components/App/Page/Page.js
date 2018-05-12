@@ -1,5 +1,5 @@
 import React from 'react';
-import EnhancedTable from '../../EnhancedTableWithConditionalRendering';
+import EnhancedTable from './EnhancedTableWithConditionalRendering';
 import Search from '../../Search';
 
 const Page = (props) => {

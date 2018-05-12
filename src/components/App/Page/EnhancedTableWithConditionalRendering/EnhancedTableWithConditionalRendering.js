@@ -1,8 +1,8 @@
 import React from 'react';
 import { compose } from 'recompose';
 
-import Table from '../Table';
-import Button from '../Button';
+import Table from '../../../Table';
+import Button from '../../../Button';
 
 const withInfiniteScroll = (conditionalFn) => (Component) =>
   class WithInfiniteScroll extends React.Component {
