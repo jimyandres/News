@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/Button';
 import './index.css';
 
 class Search extends Component {
@@ -16,16 +18,19 @@ class Search extends Component {
     } = this.props;
 
     return (
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
+      <form onSubmit={onSubmit} style={{display: 'flex', flexDirection:'row', flexWrap: 'wrap',
+      justifyContent: 'space-around'}}>
+        <TextField
+          label="Search Anything!"
+          style={{margin: '0 2em', width: '15em'}}
+          placeholder="Redux"
           value={value}
           onChange={onChange}
-          ref={(node) => { this.input = node; }}
+          inputRef={(node) => { this.input = node; }}
         />
-        <button type="submit">
+        <RaisedButton size='large' color="primary" variant="raised" type="submit" style={{margin: '1em 0'}}>
           {children}
-        </button>
+        </RaisedButton>
       </form>
     );
   }

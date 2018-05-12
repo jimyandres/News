@@ -55,7 +55,7 @@ const Loading = () =>
 
 const withLoading = (conditionalFn) => (Component) =>
   (props) =>
-    <div>
+    <div style={{display: 'flex', flexDirection:'column', alignItems: 'center'}}>
       <Component {...props} />
       {conditionalFn(props) &&
       <Loading />}
