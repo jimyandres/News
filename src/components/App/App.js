@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AppHeader from './AppHeader';
 import './index.css';
+import Page from './Page';
 
 import fetch from 'isomorphic-fetch';
 
@@ -13,8 +14,6 @@ import {
   PARAM_PAGE,
   PARAM_HPP,
 } from '../../constants';
-import EnhancedTable from '../EnhancedTableWithConditionalRendering';
-import Search from '../Search';
 
 const updateSearchTopStoriesState = (hits, page) =>
   (prevState) => {
@@ -143,33 +142,20 @@ class App extends Component {
       <div className="App">
         <AppHeader />
         <br />
-        <div className="page">
-          <div className="interactions">
-            <Search
-              value={searchTerm}
-              onChange={this.onSearchChange}
-              onSubmit={this.onSearchSubmit}
-            >
-              <span>Search </span>
-            </Search>
-          </div>
-          <EnhancedTable
-            isError={isError}
-            error={error}
-            list={list}
-            onDismiss={this.onDismiss}
-            isLoading={isLoading}
-            onClick={() => this.fetchSearchTopStories(searchKey, page+1)}
-            buttonText="Try Again"
-          />
-        </div>
+        <Page
+          value={searchTerm}
+          onChange={this.onSearchChange}
+          onSubmit={this.onSearchSubmit}
+          isError={isError}
+          error={error}
+          list={list}
+          onDismiss={this.onDismiss}
+          isLoading={isLoading}
+          onClick={() => this.fetchSearchTopStories(searchKey, page+1)}
+        />
       </div>
     );
   }
 }
 
 export default App;
-
-export {
-  Search,
-};
