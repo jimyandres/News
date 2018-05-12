@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'recompose';
 
-import Table from '../../../Table';
+import Table from './Table';
 import Button from '../../../Button';
 
 const withInfiniteScroll = (conditionalFn) => (Component) =>

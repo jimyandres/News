@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../Button';
+import Button from '../../../../Button';
 import { sortBy } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
