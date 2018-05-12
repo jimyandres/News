@@ -180,17 +180,18 @@ const SortList = ({sortKeys, ...rest}) => {
 
 const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
   const sortClass = classNames(
-    'button-inline',
-    {'button-active': sortKey === activeSortKey}
+    {'filter-active': sortKey === activeSortKey}
   );
   const arrowSort = classNames(
     {'arrow arrow-up': sortKey === activeSortKey && !isSortReverse},
     {'arrow arrow-down': sortKey === activeSortKey && isSortReverse}
   );
+  console.log(sortClass);
   return (
     <Button
       onClick={() => onSort(sortKey)}
       style={{minWidth: '12em'}}
+      active={sortClass}
     >
       {children}
       <div className='arrowContainer'><div className={arrowSort} /></div>
