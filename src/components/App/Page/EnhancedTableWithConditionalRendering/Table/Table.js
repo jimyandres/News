@@ -77,10 +77,10 @@ class Table extends Component {
 
 	handleChange(panel) {
 		return (event, expanded) => {
-    	this.setState({
-      	expanded: expanded ? panel : false,
-    	});
-  	};
+			this.setState({
+				expanded: expanded ? panel : false,
+			});
+		};
 	}
 
 	onSort(sortKey) {
@@ -143,7 +143,7 @@ class Table extends Component {
 									<b>Points:</b> {item.points}<br />
 									<b>Comments:</b> {item.num_comments}<br /><br />
 									<a href={item.url} className={classes.link}>
-                    See more
+										See more
 									</a>
 								</Typography>
 							</div>
@@ -151,7 +151,7 @@ class Table extends Component {
 						<Divider />
 						<ExpansionPanelActions>
 							<Button size="small" color="primary" onClick={() => onDismiss(item.objectID)}>
-                Dismiss
+								Dismiss
 							</Button>
 						</ExpansionPanelActions>
 					</ExpansionPanel>
@@ -166,6 +166,7 @@ Table.propTypes = {
 	sortKey: PropTypes.string,
 	onSort: PropTypes.func,
 	onDismiss: PropTypes.func,
+	classes: PropTypes.object,
 };
 
 const SortList = ({sortKeys, ...rest}) => {
@@ -178,6 +179,10 @@ const SortList = ({sortKeys, ...rest}) => {
 			{key.name}
 		</Sort>
 	);
+};
+
+SortList.propTypes = {
+	sortKeys: PropTypes.array
 };
 
 const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
@@ -198,6 +203,14 @@ const Sort = ({sortKey, onSort, activeSortKey, isSortReverse, children}) => {
 			<div className='arrowContainer'><div className={arrowSort} /></div>
 		</Button>
 	);
+};
+
+Sort.propTypes = {
+	sortKey: PropTypes.string,
+	onSort: PropTypes.func.isRequired,
+	activeSortKey: PropTypes.string,
+	isSortReverse: PropTypes.bool.isRequired,
+	children: PropTypes.node,
 };
 
 export default withStyles(styles)(Table);
