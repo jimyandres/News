@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AppHeader from './AppHeader';
-import './index.css';
+import './App.css';
 import Page from './Page';
 
 import fetch from 'isomorphic-fetch';
