@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search has a valid snapshot 1`] = `
+<form
+  onSubmit={[Function]}
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+      "justifyContent": "space-around",
+    }
+  }
+>
+  <TextField
+    inputRef={[Function]}
+    label="Search Anything!"
+    onChange={[Function]}
+    placeholder="Redux"
+    required={false}
+    select={false}
+    style={
+      Object {
+        "margin": "0 2em",
+        "width": "15em",
+      }
+    }
+  />
+  <WithStyles(Button)
+    color="primary"
+    size="large"
+    style={
+      Object {
+        "margin": "1em 0",
+      }
+    }
+    type="submit"
+    variant="raised"
+  >
+    Search
+  </WithStyles(Button)>
+</form>
+`;

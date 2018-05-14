@@ -23,8 +23,7 @@ describe('Page', () => {
 
 	it('renders without crashing', () => {
 		const div = document.createElement('div');
-		ReactDOM.render(
-			<Page {...props}/>, div);
+		ReactDOM.render(<Page {...props}/>, div);
 	});
 
 	test('has a valid snapshot', () => {

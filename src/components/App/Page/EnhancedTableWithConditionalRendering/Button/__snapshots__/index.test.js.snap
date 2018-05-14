@@ -2,10 +2,29 @@
 
 exports[`Button has a valid snapshot 1`] = `
 <button
-  className=""
+  className="MuiButtonBase-root-17 MuiButton-root-2 MuiButton-flatPrimary-4"
+  disabled={false}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex="0"
   type="button"
 >
-  Testing
+  <span
+    className="MuiButton-label-3"
+  >
+    Testing
+  </span>
+  <span
+    className="MuiTouchRipple-root-20"
+  />
 </button>
 `;
