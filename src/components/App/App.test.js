@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import renderer from 'react-test-renderer';
-import { configure } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { shallowToJson } from 'enzyme-to-json';
 import App from './App';
 
 configure({ adapter: new Adapter() });
@@ -14,10 +14,7 @@ describe('App', () => {
 	});
 
 	test('has a valid snapshot', () => {
-		const component = renderer.create(
-			<App />
-		);
-		let tree = component.toJSON();
-		expect(tree).toMatchSnapshot();
+		const component = shallow(<App />);
+		expect(shallowToJson(component)).toMatchSnapshot();
 	});
 });
