@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page has a valid snapshot 1`] = `
+<div
+  className="page"
+>
+  <div
+    className="interactions"
+  >
+    <Search
+      onChange={[Function]}
+      onSubmit={[Function]}
+      value=""
+    >
+      <span>
+        Search 
+      </span>
+    </Search>
+  </div>
+  <Component
+    buttonText="Try Again"
+    error={null}
+    isError={false}
+    isLoading={false}
+    list={null}
+    onClick={[Function]}
+    onDismiss={[Function]}
+  />
+</div>
+`;
