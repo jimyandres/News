@@ -13,6 +13,13 @@ describe('App', () => {
 		ReactDOM.render(<App />, div);
 	});
 
+	it('calls componentDidMount and updates the state', () => {
+		jest.spyOn(App.prototype, 'componentDidMount');
+		const wrapper = shallow(<App />);
+		expect(App.prototype.componentDidMount.mock.calls.length).toBe(1);
+		expect(wrapper.state().searchKey).toEqual('redux');
+	});
+
 	test('has a valid snapshot', () => {
 		const component = shallow(<App />);
 		expect(shallowToJson(component)).toMatchSnapshot();
