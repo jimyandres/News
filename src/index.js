@@ -5,10 +5,10 @@ import registerServiceWorker from './registerServiceWorker';
 import Root from './components/Root';
 
 ReactDOM.render(
-  <Root />,
-  document.getElementById('root'));
+	<Root />,
+	document.getElementById('root'));
 registerServiceWorker();
 
 if (module.hot) {
-  module.hot.accept();
+	module.hot.accept();
 }
