@@ -1,5 +1,6 @@
 import React from 'react';
 import { compose } from 'recompose';
+import './EnhancedTableWithConditionalRendering.css';
 
 import Table from './Table';
 import Button from './Button';

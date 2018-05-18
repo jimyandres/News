@@ -22,9 +22,3 @@
 .page {
   margin: 20px;
 }
-
-.interactions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
