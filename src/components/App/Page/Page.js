@@ -2,6 +2,7 @@ import React from 'react';
 import EnhancedTable from './EnhancedTableWithConditionalRendering';
 import PropTypes from 'prop-types';
 import Search from './Search';
+import './Page.css';
 
 const Page = (props) => {
 	const {
