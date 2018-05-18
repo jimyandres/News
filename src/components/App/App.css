@@ -28,22 +28,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-.loader{
-  margin: 0 0 0;
-  height: 40px;
-  width: 20%;
-  text-align: center;
-  padding: 0;
-  margin: 0 auto 0;
-  display: inline-block;
-  vertical-align: top;
-}
-
-/*
-  Set the color of the icon
-*/
-svg path,
-svg rect{
-  fill: #ef6c00;
-}
