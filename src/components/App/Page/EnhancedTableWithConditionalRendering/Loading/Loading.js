@@ -1,4 +1,5 @@
 import React from 'react';
+import './Loading.css';
 
 const Loading = () =>
   <div className="loader loader--style1" title="0">
