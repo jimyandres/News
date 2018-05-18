@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
+import './Button.css';
 import MaterialButton from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 
